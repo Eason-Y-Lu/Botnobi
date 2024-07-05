@@ -9,7 +9,7 @@ jobs:
   build-and-run:
     runs-on: ubuntu-latest
 
-    timeout-minutes: 600
+    timeout-minutes: 300
 
     steps:
       - name: Checkout code
@@ -17,9 +17,9 @@ jobs:
 
       - name: Create .env file from secrets
         run: |
-          echo "{\"token\"=\"${{ secrets.TOKEN }}\"" > secrets.json
+          echo "{\"token\":\"${{ secrets.TOKEN }}\"" > secrets.json
 
-      - name: CI the bot for 10 min
+      - name: CI the bot for 5 min
         if: always()
         run: |
           pip install --no-cache-dir -r requirements.txt
