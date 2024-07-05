@@ -17,14 +17,11 @@ jobs:
       - name: Install requirements
         run: pip install --no-cache-dir -r requirements.txt
       - name: Build Perlin.c
-        run: |
-          sudo apt-get install build-essential cmake 
-          export CC=gcc
-          cmake .
-          make
+        run: clang -O3 perlin.c -o perlin -lm
       - name: CI the bot for 5 min
         timeout-minutes: 5
         run: python bot.py
+        if: always()
       - name: Status Report
         if: always()
         run: echo "Ok"
