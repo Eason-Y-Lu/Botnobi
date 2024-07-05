@@ -23,5 +23,5 @@ jobs:
         timeout-minutes: 5
         run: python bot.py
       - name: Status Report
-        if: ${{ steps.commitlint.outcome == 'failure' }}
+        if: ${{ steps.botCI.outcome == 'failure' }}
         run: return 0
