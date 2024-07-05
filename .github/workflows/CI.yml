@@ -9,16 +9,15 @@ jobs:
   build-and-run:
     runs-on: ubuntu-latest
 
-    timeout-minutes: 300
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Create .env file from secrets
-        run: echo "{\"token\":\"${{ secrets.TOKEN }}\",}" > secrets.json
+        run: echo "{\"token\":\"${{ secrets.TOKEN }}\"}" > secrets.json
       - name: Install requirements
         run: pip install --no-cache-dir -r requirements.txt
       - name: CI the bot for 5 min
+        timeout-minutes: 300
         run: python bot.py
       - name: Status Report
         if: always()
