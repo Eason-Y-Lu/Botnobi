@@ -12,16 +12,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Create .env file from secrets
+      - name: Create secrets.json file from secrets
         run: echo "{\"token\":\"${{ secrets.TOKEN }}\"}" > secrets.json
       - name: Install requirements
         run: pip install --no-cache-dir -r requirements.txt
       - name: Build Perlin.c
         run: clang -O3 perlin.c -o perlin -lm
       - name: CI the bot for 5 min
+        id: botCI
         timeout-minutes: 5
         run: python bot.py
-        if: always()
       - name: Status Report
-        if: always()
-        run: echo "Ok"
+        if: ${{ steps.commitlint.outcome == 'failure' }}
+        run: return 0
