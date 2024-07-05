@@ -1,4 +1,4 @@
-name: Build and Run Docker Container
+name: SimpleBotCI
 
 on: 
   workflow_dispatch:
