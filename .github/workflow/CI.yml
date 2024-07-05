@@ -1,10 +1,11 @@
-name: Build and Run Docker Container
+name: SimpleBotCI
 
-on: 
+on:
   workflow_dispatch:
   push:
+    branches: "**"
   pull_request:
-  
+    branches: "**"
 
 jobs:
   build-and-run:
@@ -13,15 +14,16 @@ jobs:
     timeout-minutes: 600
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Create .env file from secrets
-      run: |
-        echo "{\"token\"=\"${{ secrets.TOKEN }}\"" > secrets.json
+      - name: Create .env file from secrets
+        run: |
+          echo "{\"token\"=\"${{ secrets.TOKEN }}\"" > secrets.json
 
-    - name: CI the bot for 10 min
-      if: always()
-      run: |
-        pip install --no-cache-dir -r requirements.txt
-        python bot.py
+      - name: CI the bot for 10 min
+        if: always()
+        run: |
+          pip install --no-cache-dir -r requirements.txt
+          python bot.py
+          
