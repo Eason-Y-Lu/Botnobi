@@ -16,6 +16,8 @@ jobs:
         run: echo "{\"token\":\"${{ secrets.TOKEN }}\"}" > secrets.json
       - name: Install requirements
         run: pip install --no-cache-dir -r requirements.txt
+      - name: Build Perlin.c
+        run: clang -O3 perlin.c -o perlin
       - name: CI the bot for 5 min
         timeout-minutes: 300
         run: python bot.py
