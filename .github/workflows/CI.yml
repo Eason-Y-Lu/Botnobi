@@ -17,7 +17,9 @@ jobs:
       - name: Install requirements
         run: pip install --no-cache-dir -r requirements.txt
       - name: Build Perlin.c
-        run: gcc -O3 perlin.c -o perlin
+        run: |
+          sudo apt-get install build-essential
+          gcc -O3 perlin.c -o perlin
       - name: CI the bot for 5 min
         timeout-minutes: 5
         run: python bot.py
